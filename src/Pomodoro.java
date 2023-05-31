@@ -13,11 +13,25 @@ public class Pomodoro extends JFrame implements ActionListener {
     private JPanel middle;
     private JLabel countdown;
     private JPanel bottom;
+    private JLabel dynamicTimerLabel;
+    private JLabel staticTimerLabel;
+
+    private int sessiontime = 1500;
+    private int elapsedtime = sessiontime*1000;
+    private int hour = elapsedtime/3600000;
+    private int min = (elapsedtime/600000) % 60;
+    private int sec = elapsedtime/1000 % 60;
+
+    String hour_string = String.format("%02d", hour);
+    String min_string = String.format("%02d", min);
+    String sec_string = String.format("%02d", sec);
+
+
 
     private int seconds;
     private Timer time;
 
-    public Pomodoro(){
+    public Pomodoro() {
         setup();
         time = new Timer(1000, null);
         staticTimerLabel = new JLabel("Time Remaining");
@@ -30,12 +44,12 @@ public class Pomodoro extends JFrame implements ActionListener {
         this.add(this.time_label);
     }
 
-    private void setup(){
+    private void setup() {
         setContentPane(screen);
         setTitle("PomodoroTimer");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400,320);
-        setLocation(500,250);
+        setSize(400, 320);
+        setLocation(500, 250);
         setVisible(true);
 
         pomodoro.addActionListener(this);
@@ -45,10 +59,10 @@ public class Pomodoro extends JFrame implements ActionListener {
         time.addActionListener(this);
     }
 
-    public void actionPerformed(ActionEvent ea){
+    public void actionPerformed(ActionEvent ea) {
         Object source = ea.getSource();
-        if(source instanceof JButton){
-            JButton button = (JButton)source;
+        if (source instanceof JButton) {
+            JButton button = (JButton) source;
             String name = button.getText();
 
             if (name.equals("Pomodoro")) {
@@ -67,6 +81,14 @@ public class Pomodoro extends JFrame implements ActionListener {
         }
     }
 
+    private void timerFires() {
+        seconds--;
+        dynamicTimerLabel.setText("" + seconds);
+        if(seconds == 0){
+            time.stop();
+            staticTimerLabel.setText("Time's up!");
+        }
+    }
 
 
 //    private void createUIComponents(){
