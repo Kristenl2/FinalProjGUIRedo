@@ -7,41 +7,23 @@ public class Pomodoro extends JFrame implements ActionListener {
     private JButton pomodoro;
     private JButton shortBreak;
     private JButton longBreak;
-    private JButton pause;
+    private JButton start;
     private JPanel screen;
     private JPanel top;
     private JPanel middle;
     private JLabel countdown;
     private JPanel bottom;
-    private JLabel dynamicTimerLabel;
-    private JLabel staticTimerLabel;
+    private JButton stop;
 
-    private int sessiontime = 1500;
-    private int elapsedtime = sessiontime*1000;
-    private int hour = elapsedtime/3600000;
-    private int min = (elapsedtime/600000) % 60;
-    private int sec = elapsedtime/1000 % 60;
-
-    String hour_string = String.format("%02d", hour);
-    String min_string = String.format("%02d", min);
-    String sec_string = String.format("%02d", sec);
-
-
-
-    private int seconds;
     private Timer time;
 
+    private int seconds;
+
+
     public Pomodoro() {
-        setup();
         time = new Timer(1000, null);
-        staticTimerLabel = new JLabel("Time Remaining");
-        dynamicTimerLabel = new JLabel();
-        // createUIComponents();
-
-
-        this.time_label = new JLabel(hour_string + ":" + min_string + ":" + sec_string);
-        this.time_label.setBounds(175,100,100,100);
-        this.add(this.time_label);
+        setup();
+        createUIComponents();
     }
 
     private void setup() {
@@ -52,11 +34,14 @@ public class Pomodoro extends JFrame implements ActionListener {
         setLocation(500, 250);
         setVisible(true);
 
+        countdown.setFont(new Font("Helvetica", Font.BOLD,20));
+
         pomodoro.addActionListener(this);
         shortBreak.addActionListener(this);
         longBreak.addActionListener(this);
-        pause.addActionListener(this);
+        start.addActionListener(this);
         time.addActionListener(this);
+        time.start();
     }
 
     public void actionPerformed(ActionEvent ea) {
@@ -77,22 +62,24 @@ public class Pomodoro extends JFrame implements ActionListener {
             }
 
         } else if (source instanceof Timer) {
-
+            timerFires();
         }
     }
 
     private void timerFires() {
         seconds--;
-        dynamicTimerLabel.setText("" + seconds);
+        int mins = seconds/60;
+        int secs = seconds%60;
+        countdown.setText(mins + ":" + secs);
         if(seconds == 0){
             time.stop();
-            staticTimerLabel.setText("Time's up!");
+            countdown.setText("Time's up!");
         }
     }
 
 
-//    private void createUIComponents(){
-//        setContentPane(screen);
-//        setTitle("PomodoroTimer");
-//    }
+    private void createUIComponents(){
+        setContentPane(screen);
+        setTitle("PomodoroTimer");
+    }
 }
