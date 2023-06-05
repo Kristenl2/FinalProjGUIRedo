@@ -24,6 +24,8 @@ public class Pomodoro extends JFrame implements ActionListener {
     private Timer time;
     private int seconds;
     private boolean isOn;
+    private ArrayList<String> allTasks;
+
 
 
     public Pomodoro() {
@@ -49,6 +51,8 @@ public class Pomodoro extends JFrame implements ActionListener {
         start.addActionListener(this);
         time.addActionListener(this);
         time.start();
+        add.addActionListener(this);
+        remove.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent ea) {
@@ -78,12 +82,17 @@ public class Pomodoro extends JFrame implements ActionListener {
                 countdown.setText(seconds/60 + ":" + seconds%60);
                 start.setText("Start");
                 isOn = false;
+            }else if(name.equals("Add")){
+                allTasks.add(textField1.getText());
+
             }
         } else if (source instanceof Timer) {
             if(isOn) {
                 timerFires();
             }
         }
+
+
     }
 
     private void timerFires() {
@@ -102,4 +111,7 @@ public class Pomodoro extends JFrame implements ActionListener {
         setContentPane(screen);
         setTitle("PomodoroTimer");
     }
+
+
+
 }
