@@ -14,6 +14,13 @@ public class Pomodoro extends JFrame implements ActionListener {
     private JPanel middle;
     private JLabel countdown;
     private JPanel bottom;
+    private JList tasks;
+    private JLabel task;
+    private JTextField textField1;
+    private JPanel Tasks;
+    private JButton add;
+    private JButton remove;
+    private JPanel insert;
     private Timer time;
     private int seconds;
     private boolean isOn;
@@ -29,12 +36,12 @@ public class Pomodoro extends JFrame implements ActionListener {
         setContentPane(screen);
         setTitle("PomodoroTimer");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 320);
+        setSize(400, 600);
         setLocation(500, 250);
         setVisible(true);
 
         countdown.setFont(new Font("Helvetica", Font.BOLD,20));
-        countdown.setText("0:00");
+        countdown.setText("00:00");
 
         pomodoro.addActionListener(this);
         shortBreak.addActionListener(this);
@@ -51,12 +58,15 @@ public class Pomodoro extends JFrame implements ActionListener {
             String name = button.getText();
 
             if (name.equals("Pomodoro")) {
+                isOn = false;
                 seconds = 1500;
                 countdown.setText("25:00");
             } else if (name.equals("Short Break")){
+                isOn = false;
                 seconds = 300;
                 countdown.setText("5:00");
             } else if (name.equals("Long Break")) {
+                isOn = false;
                 seconds = 600;
                 countdown.setText("10:00");
             } else if (name.equals("Start")){
