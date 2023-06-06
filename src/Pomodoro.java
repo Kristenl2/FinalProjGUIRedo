@@ -30,6 +30,7 @@ public class Pomodoro extends JFrame implements ActionListener {
 
     public Pomodoro() {
         time = new Timer(1000, null);
+        allTasks = new ArrayList<>();
         setup();
         createUIComponents();
     }
@@ -65,14 +66,17 @@ public class Pomodoro extends JFrame implements ActionListener {
 
             if (name.equals("Pomodoro")) {
                 isOn = false;
+                start.setText("Start");
                 seconds = 1500;
                 countdown.setText("25:00");
             } else if (name.equals("Short Break")){
                 isOn = false;
+                start.setText("Start");
                 seconds = 300;
                 countdown.setText("5:00");
             } else if (name.equals("Long Break")) {
                 isOn = false;
+                start.setText("Start");
                 seconds = 600;
                 countdown.setText("10:00");
             } else if (name.equals("Start")){
@@ -110,14 +114,29 @@ public class Pomodoro extends JFrame implements ActionListener {
     }
 
     private void addTasks(){
-        allTasks = new ArrayList<>();
         allTasks.add(textField1.getText());
         String t[] = new String[allTasks.size()];
         for(int i = 0; i<allTasks.size(); i++){
             t[i] = allTasks.get(i);
         }
-        tasks = new JList(t);
+        textField1.setText("");
+        if (allTasks != null && allTasks.size() > 0) {
+            tasks.setListData(t);
+        }
     }
+
+    private void removeTasks(){
+        int selectedIndex = tasks.getSelectedIndex();
+        if (selectedIndex != -1) {
+            allTasks.remove(selectedIndex);
+            String t[] = new String[allTasks.size()];
+            for(int i = 0; i<allTasks.size(); i++){
+                t[i] = allTasks.get(i);
+            }
+            tasks.setListData(t);
+        }
+    }
+
 
     private void createUIComponents(){
         setContentPane(screen);
