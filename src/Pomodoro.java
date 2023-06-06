@@ -45,6 +45,8 @@ public class Pomodoro extends JFrame implements ActionListener {
         countdown.setFont(new Font("Helvetica", Font.BOLD,20));
         countdown.setText("00:00");
 
+        task.setText("Type your task in the box below and click Add: ");
+
         pomodoro.addActionListener(this);
         shortBreak.addActionListener(this);
         longBreak.addActionListener(this);
@@ -83,7 +85,9 @@ public class Pomodoro extends JFrame implements ActionListener {
                 start.setText("Start");
                 isOn = false;
             }else if(name.equals("Add")){
-                allTasks.add(textField1.getText());
+                if(textField1.getText().length()>0){
+                    addTasks();
+                }
 
             }
         } else if (source instanceof Timer) {
@@ -91,8 +95,6 @@ public class Pomodoro extends JFrame implements ActionListener {
                 timerFires();
             }
         }
-
-
     }
 
     private void timerFires() {
@@ -107,11 +109,19 @@ public class Pomodoro extends JFrame implements ActionListener {
         }
     }
 
+    private void addTasks(){
+        allTasks = new ArrayList<>();
+        allTasks.add(textField1.getText());
+        String t[] = new String[allTasks.size()];
+        for(int i = 0; i<allTasks.size(); i++){
+            t[i] = allTasks.get(i);
+        }
+        tasks = new JList(t);
+    }
+
     private void createUIComponents(){
         setContentPane(screen);
         setTitle("PomodoroTimer");
     }
-
-
 
 }
