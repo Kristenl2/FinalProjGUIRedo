@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 
 public class Pomodoro extends JFrame implements ActionListener {
     private JButton pomodoro;
@@ -56,6 +57,7 @@ public class Pomodoro extends JFrame implements ActionListener {
         time.start();
         add.addActionListener(this);
         remove.addActionListener(this);
+        //tasks = new DefaultListModel<>();
     }
 
     public void actionPerformed(ActionEvent ea) {
@@ -92,6 +94,9 @@ public class Pomodoro extends JFrame implements ActionListener {
                 if(textField1.getText().length()>0){
                     addTasks();
                 }
+
+            }else if(name.equals("Remove")){
+              removeTasks();
 
             }
         } else if (source instanceof Timer) {
