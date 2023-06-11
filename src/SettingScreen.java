@@ -22,7 +22,7 @@ public class SettingScreen extends JFrame implements ActionListener, ChangeListe
 
     public SettingScreen() {
     setTitle("Settings");
-    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    setDefaultCloseOperation(HIDE_ON_CLOSE);
     setSize(650,400);
     setLocation(500,250);
     createUIComponents();

@@ -163,7 +163,7 @@
               <background color="-5645085"/>
               <font name="DejaVu Sans Mono"/>
               <foreground color="-7821346"/>
-              <text value="Pink"/>
+              <text value="Blue"/>
             </properties>
           </component>
           <component id="12bbd" class="javax.swing.JButton" binding="button4" default-binding="true">
@@ -174,7 +174,7 @@
               <background color="-868655"/>
               <font name="DejaVu Sans Mono"/>
               <foreground color="-395786"/>
-              <text value="Beige"/>
+              <text value="Pink"/>
             </properties>
           </component>
         </children>

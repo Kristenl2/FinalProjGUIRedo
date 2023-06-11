@@ -149,6 +149,7 @@ public class Pomodoro extends JFrame implements ActionListener {
         start.setBackground(tc);
         add.setBackground(tc);
         remove.setBackground(tc);
+        setting.setBackground(tc);
     }
 
     private void timerFires() {
